@@ -5,6 +5,14 @@ VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clay.Api", "Clay.Api\Clay.Api.csproj", "{3C469D23-5840-458B-AB6C-30B3A75BAA66}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A30035FA-AA0D-4A9E-A3A5-604F0E8936F5}"
+	ProjectSection(SolutionItems) = preProject
+		DESIGN.md = DESIGN.md
+		ERD.png = ERD.png
+		high-level-design.jpg = high-level-design.jpg
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
