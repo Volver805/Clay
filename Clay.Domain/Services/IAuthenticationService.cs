@@ -9,7 +9,7 @@ namespace Clay.Domain.Services
 {
     public interface IAuthenticationService
     {
-        public Task<string?> AuthenticateUser(string username, string password);
+        public string? AuthenticateUser(string username, string password);
         public string GenerateBearerToken(User user);
     }
 }

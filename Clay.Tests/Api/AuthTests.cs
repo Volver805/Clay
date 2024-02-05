@@ -24,10 +24,10 @@ namespace Clay.Tests.Api
             // Arrange
             var invalidUsernameRequest = new LoginRequest { username = "invalidUsername", password = "validPassword" };
             _authenticationServiceMock.Setup(x => x.AuthenticateUser(It.IsAny<string>(), It.IsAny<string>()))
-                            .ReturnsAsync((string)null);
+                            .Returns((string)null);
 
             // Act
-            var result = await _authController.login(invalidUsernameRequest);
+            var result = _authController.login(invalidUsernameRequest);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(UnauthorizedObjectResult));
@@ -39,10 +39,10 @@ namespace Clay.Tests.Api
             // Arrange
             var invalidPasswordRequest = new LoginRequest { username = "validUsername", password = "invalidPassword" };
             _authenticationServiceMock.Setup(x => x.AuthenticateUser(It.IsAny<string>(), It.IsAny<string>()))
-                            .ReturnsAsync((string)null);
+                            .Returns((string)null);
 
             // Act
-            var result = await _authController.login(invalidPasswordRequest);
+            var result = _authController.login(invalidPasswordRequest);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(UnauthorizedObjectResult));
@@ -55,10 +55,10 @@ namespace Clay.Tests.Api
             // Arrange
             var validRequest = new LoginRequest {username = "validUsername", password = "validPassword" };
             _authenticationServiceMock.Setup(x => x.AuthenticateUser(It.IsAny<string>(), It.IsAny<string>()))
-                            .ReturnsAsync(token);
+                            .Returns(token);
 
             // Act
-            var result = await _authController.login(validRequest);
+            var result = _authController.login(validRequest);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(OkObjectResult));
@@ -71,7 +71,7 @@ namespace Clay.Tests.Api
             var missingUsernameRequest = new LoginRequest { password = "validPassword" };
 
             // Act
-            var result = await _authController.login(missingUsernameRequest);
+            var result = _authController.login(missingUsernameRequest);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(UnauthorizedObjectResult));
@@ -84,7 +84,7 @@ namespace Clay.Tests.Api
             var missingPasswordRequest = new LoginRequest { username = "validUsername" };
 
             // Act
-            var result = await _authController.login(missingPasswordRequest);
+            var result = _authController.login(missingPasswordRequest);
 
             // Assert
             Assert.IsInstanceOfType(result, typeof(UnauthorizedObjectResult));

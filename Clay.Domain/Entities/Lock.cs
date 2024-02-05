@@ -1,8 +1,7 @@
 ﻿namespace Clay.Domain.Entities
 {
-    public class Lock
+    public class Lock: BaseEntity
     {
-        public int ID { get; set; }
         public string SerialNumber { get; set; }
         public string Label { get; set; }
         public bool IsLocked { get; set; }

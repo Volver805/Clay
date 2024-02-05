@@ -15,11 +15,11 @@ namespace Clay.Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> login(LoginRequest request)
+        public IActionResult login(LoginRequest request)
         {
             try
             {
-                var token = await _authenticationService.AuthenticateUser(request.username, request.password);
+                var token = _authenticationService.AuthenticateUser(request.username, request.password);
                 
                 if (token == null)
                 {

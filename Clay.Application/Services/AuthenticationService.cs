@@ -1,6 +1,7 @@
 ﻿using Clay.Domain.Entities;
 using Clay.Domain.Repositories;
 using Clay.Domain.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -15,19 +16,19 @@ namespace Clay.Application.Services
 {
     public class AuthenticationService: IAuthenticationService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IRepository<User> _userRepository;
         private readonly IConfiguration _configuration;
-        public AuthenticationService(IUserRepository userRepository, IConfiguration configuration)
+        public AuthenticationService(IRepository<User> userRepository, IConfiguration configuration)
         {
             _userRepository = userRepository;
             _configuration = configuration;
         }
 
-        public async Task<string?> AuthenticateUser(string username, string password)
+        public string? AuthenticateUser(string username, string password)
         {
-            var user = await _userRepository.GetUserByUsernameAndPassword(username, password);
+            var user = _userRepository.GetAll().FirstOrDefault(user => user.Username == username);
 
-            if(user == null)
+            if(user == null || validateUserPassword(user.HashPassword, password) != PasswordVerificationResult.Success)
             {
                 return null;
             }
@@ -57,6 +58,12 @@ namespace Clay.Application.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private PasswordVerificationResult validateUserPassword(string hashedPassword, string password)
+        {
+            var passwordHasher = new PasswordHasher<Object>();
+            return passwordHasher.VerifyHashedPassword(null, hashedPassword, password);
         }
     }
 }

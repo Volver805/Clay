@@ -1,4 +1,5 @@
 using Clay.Application.Services;
+using Clay.Domain.Entities;
 using Clay.Domain.Repositories;
 using Clay.Domain.Services;
 using Clay.Infrastructure.Data;
@@ -17,7 +18,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 
 var jwtSettings = builder.Configuration.GetSection("JWTSettings");
