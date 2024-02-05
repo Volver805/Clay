@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Clay.Domain\Clay.Domain.csproj" />
-    <ProjectReference Include="..\Clay.Infrastructure\Clay.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

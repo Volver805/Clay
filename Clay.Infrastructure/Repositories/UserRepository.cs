@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clay.Application.Repositories
+namespace Clay.Infrastructure.Repositories
 {
     public class UserRepository: IUserRepository
     {

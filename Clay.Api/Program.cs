@@ -1,8 +1,8 @@
-using Clay.Application.Repositories;
 using Clay.Application.Services;
 using Clay.Domain.Repositories;
 using Clay.Domain.Services;
 using Clay.Infrastructure.Data;
+using Clay.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
