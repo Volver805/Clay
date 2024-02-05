@@ -11,9 +11,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.0.4" />
     <PackageReference Include="MSTest.TestFramework" Version="3.0.4" />
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Clay.Api\Clay.Api.csproj" />
+    <ProjectReference Include="..\Clay.Application\Clay.Application.csproj" />
+    <ProjectReference Include="..\Clay.Domain\Clay.Domain.csproj" />
   </ItemGroup>
 
 </Project>
