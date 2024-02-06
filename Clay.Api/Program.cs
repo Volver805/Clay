@@ -1,3 +1,4 @@
+using Clay.Api.Middleware;
 using Clay.Application.Services;
 using Clay.Domain.Entities;
 using Clay.Domain.Repositories;
@@ -17,8 +18,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<ILockService, LockService>();
+builder.Services.AddScoped<IEventService, EventService > ();
 
 
 var jwtSettings = builder.Configuration.GetSection("JWTSettings");
@@ -55,6 +59,11 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/locks"), app =>
+{
+    app.UseLockAuthorization();
+});
 
 app.MapControllers();
 

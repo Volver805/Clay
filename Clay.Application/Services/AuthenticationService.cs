@@ -1,6 +1,7 @@
 ﻿using Clay.Domain.Entities;
 using Clay.Domain.Repositories;
 using Clay.Domain.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;

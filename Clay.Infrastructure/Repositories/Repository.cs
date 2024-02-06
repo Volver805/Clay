@@ -23,7 +23,7 @@ namespace Clay.Infrastructure.Repositories
 
         public IQueryable<TEntity> GetAll()
         {
-            return _dbSet.AsQueryable();
+            return _dbSet.AsQueryable<TEntity>();
         }
         public async Task<TEntity> GetByIdAsync(int id)
         {
