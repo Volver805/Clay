@@ -65,6 +65,11 @@ app.UseWhen(context => context.Request.Path.StartsWithSegments("/api/locks"), ap
     app.UseLockAuthorization();
 });
 
+app.UseWhen(context => context.Request.Path.Equals("/api/history"), app =>
+{
+    app.UseAdminAuthorization();
+});
+
 app.MapControllers();
 
 app.Run();

@@ -6,7 +6,6 @@ In our office we have 2 main doors entrance and storage room currently employees
 Developing an interface that allows its users who have the right access to unlock/lock specific door remotely.
 
 ### Assumption
-- We should have Admin endpoints that can manage users and control their access and also view events history.
 - Some locks should lock automatically after a specific period of time when unlocked.
 - It should be easy to add new locks to our system without having to update the codebase correspondingly.
 

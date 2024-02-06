@@ -14,13 +14,13 @@ namespace Clay.Api.Middleware
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, ILockService lockService)
+        public async Task Invoke(HttpContext context, ILockService lockService, IAuthenticationService authenticationService)
         {
             if (context.Request.RouteValues.TryGetValue("lockId", out var lockIdObj) && lockIdObj is string lockIdStr)
             {
                 if (int.TryParse(lockIdStr, out var lockId))
                 {
-                    var userId = GetCurrentUserIdFromToken(context);
+                    var userId = authenticationService.GetCurrentUserIdFromToken(context);
 
                     if (userId.HasValue)
                     {
@@ -59,20 +59,6 @@ namespace Clay.Api.Middleware
             var unauthorizedMessage = new { Message = "Unauthorized access." };
             await JsonSerializer.SerializeAsync(context.Response.Body, unauthorizedMessage);
 
-        }
-        private int? GetCurrentUserIdFromToken(HttpContext context)
-        {
-            if (context.User?.Identity is ClaimsIdentity claimsIdentity)
-            {
-                var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-
-                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var userId))
-                {
-                    return userId;
-                }
-            }
-
-            return null;
         }
     }
 

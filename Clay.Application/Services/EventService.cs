@@ -25,6 +25,8 @@ namespace Clay.Application.Services
                 Description = description,
                 UserId = userId,
                 LockId = lockId,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
             };
 
             await _eventRepository.CreateAsync(newEvent);
@@ -39,7 +41,30 @@ namespace Clay.Application.Services
                 query = query.Where(e => e.LockId == lockId.Value);
             }
 
-            return await query.ToListAsync();
+            return await query
+                .Include(el => el.User)
+                .Include(el => el.Lock)
+                .Select(el => new Event
+                {
+                    ID = el.ID,
+                    Type = el.Type,
+                    Description = el.Description,
+                    User = new User
+                    {
+                        Name = el.User.Name,
+                    },
+                    Lock = new Lock
+                    {
+                        Label = el.Lock.Label,
+                        SerialNumber = el.Lock.SerialNumber,
+                        IsLocked = el.Lock.IsLocked,
+                        UnlockedAt = el.Lock.UnlockedAt,
+                    },
+                    CreatedAt = el.CreatedAt,
+                    UpdatedAt = el.UpdatedAt,
+                })
+                .OrderByDescending(e => e.CreatedAt)
+                .ToListAsync();
         }
     }
 }

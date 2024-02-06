@@ -3,6 +3,7 @@ using Clay.Domain.Repositories;
 using Clay.Domain.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -61,6 +62,27 @@ namespace Clay.Application.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        public int? GetCurrentUserIdFromToken(HttpContext context)
+        {
+            if (context.User?.Identity is ClaimsIdentity claimsIdentity)
+            {
+                var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+
+                if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var userId))
+                {
+                    return userId;
+                }
+            }
+
+            return null;
+        }
+
+        public bool isAdmin(int userId)
+        {
+            var user = _userRepository.GetAll().Include(user => user.UserRoles).ThenInclude(userRoles => userRoles.Role).FirstOrDefault(user => user.ID == userId);
+            return user.UserRoles.Any(userRole => userRole.RoleId == 2); // Admin role id is 2
+            
+        }
         private PasswordVerificationResult validateUserPassword(string hashedPassword, string password)
         {
             var passwordHasher = new PasswordHasher<Object>();
