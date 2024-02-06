@@ -1,37 +1,57 @@
-﻿namespace Clay.Tests.Api
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using Clay.Domain.Services;
+using Clay.Api.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+
+namespace Clay.Tests.Api
 {
     [TestClass]
     public class LockTests
     {
         [TestMethod]
-        public void TestLockDoor()
+        public async Task TestLockDoor()
         {
-            throw new NotImplementedException();
+            var lockServiceMock = new Mock<ILockService>();
+            lockServiceMock.Setup(service => service.UpdateLockStatus(It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<int>()));
+
+            var controller = new LockController(lockServiceMock.Object);
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext()
+            };
+            controller.HttpContext.Items["UserId"] = 123;
+
+            // Act
+            var result = await controller.Lock(1);
+
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+            lockServiceMock.Verify(service => service.UpdateLockStatus(1, true, 123), Times.Once);
         }
 
-        public void TestUnlockDoor()
+        [TestMethod]
+        public async Task TestUnlockDoor()
         {
-            throw new NotImplementedException();
-        }
+            // Arrange
+            var lockServiceMock = new Mock<ILockService>();
+            lockServiceMock.Setup(service => service.UpdateLockStatus(It.IsAny<int>(), It.IsAny<bool>(), It.IsAny<int>()));
 
-        public void TestUnlockDoorNotFound()
-        {
-            throw new NotImplementedException();
-        }
+            var controller = new LockController(lockServiceMock.Object);
+            controller.ControllerContext = new ControllerContext
+            {
+                HttpContext = new DefaultHttpContext()
+            };
+            controller.HttpContext.Items["UserId"] = 123;
 
-        public void TestUnlockDoorUnauthorizedAccess()
-        {
-            throw new NotImplementedException();
-        }
+            // Act
+            var result = await controller.Unlock(1);
 
-        public void TestUnlockDoorMissingBearerToken()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void TestUnlockDoorUserRoleDoesNotHaveAccess()
-        {
-            throw new NotImplementedException();
+            // Assert
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+            lockServiceMock.Verify(service => service.UpdateLockStatus(1, false, 123), Times.Once);
         }
     }
 }
