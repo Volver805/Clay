@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "e00f13b6-94de-4a8b-9949-1d646594c69e",
+		"name": "Clay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "12925629"
+	},
+	"item": [
+		{
+			"name": "Unlock door",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwidW5pcXVlX25hbWUiOiJOYWRpaWEiLCJleHAiOjE3MDcyNDc2NDIsImlzcyI6Imh0dHBzOi8vd3d3Lm15LWNsYXkuY29tLyIsImF1ZCI6Imh0dHBzOi8vd3d3Lm15LWNsYXkuY29tLyJ9.k2izEqksgsEdYKglpbJcnWLu35HzdZNjZWx7aMmNpY8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7279/api/locks/unlock/:lockId",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7279",
+					"path": [
+						"api",
+						"locks",
+						"unlock",
+						":lockId"
+					],
+					"variable": [
+						{
+							"key": "lockId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lock door",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwidW5pcXVlX25hbWUiOiJOaWtpdGEiLCJleHAiOjE3MDcyMzQ0MDYsImlzcyI6Imh0dHBzOi8vd3d3Lm15LWNsYXkuY29tLyIsImF1ZCI6Imh0dHBzOi8vd3d3Lm15LWNsYXkuY29tLyJ9.wZjJ0aahQrFe5gTDy0EuWHsRE5AoR6A2iH4dg6hp09A",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7279/api/locks/lock/:lockId",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7279",
+					"path": [
+						"api",
+						"locks",
+						"lock",
+						":lockId"
+					],
+					"variable": [
+						{
+							"key": "lockId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "/* \r\n// Employee\r\n{\r\n    \"username\": \"Nikita\",\r\n    \"password\": \"billiondollarcode\"\r\n}\r\n\r\n// Admin\r\n{\r\n    \"username\": \"Nadiia\",\r\n    \"password\": \"sett5000\" \r\n}\r\n*/\r\n{\r\n    \"username\": \"Nadiia\",\r\n    \"password\": \"sett5000\" \r\n}\r\n\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://localhost:7279/api/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "List Event History",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzIiwidW5pcXVlX25hbWUiOiJOYWRpaWEiLCJleHAiOjE3MDcyMzQ1NTMsImlzcyI6Imh0dHBzOi8vd3d3Lm15LWNsYXkuY29tLyIsImF1ZCI6Imh0dHBzOi8vd3d3Lm15LWNsYXkuY29tLyJ9.USO5CIjfSntczDeML83G1lKxWBq3vTJgixWPRiqQ_lg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7279/api/history",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7279",
+					"path": [
+						"api",
+						"history"
+					],
+					"query": [
+						{
+							"key": "lockId",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
