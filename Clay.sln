@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clay.Api", "Clay.Api\Clay.Api.csproj", "{3C469D23-5840-458B-AB6C-30B3A75BAA66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clay.Api", "Clay.Api\Clay.Api.csproj", "{3C469D23-5840-458B-AB6C-30B3A75BAA66}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A30035FA-AA0D-4A9E-A3A5-604F0E8936F5}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,13 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clay.Domain", "Clay.Domain\Clay.Domain.csproj", "{B0E780C0-D129-4A2D-AF56-8FBDB83D9F8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clay.Domain", "Clay.Domain\Clay.Domain.csproj", "{B0E780C0-D129-4A2D-AF56-8FBDB83D9F8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clay.Infrastructure", "Clay.Infrastructure\Clay.Infrastructure.csproj", "{6166376E-32DF-4B48-A13C-0943B60F8CB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clay.Infrastructure", "Clay.Infrastructure\Clay.Infrastructure.csproj", "{6166376E-32DF-4B48-A13C-0943B60F8CB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clay.Tests", "Clay.Tests\Clay.Tests.csproj", "{AE477DF8-FB2E-4BD3-8AA9-1E42916188E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clay.Tests", "Clay.Tests\Clay.Tests.csproj", "{AE477DF8-FB2E-4BD3-8AA9-1E42916188E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clay.Application", "Clay.Application\Clay.Application.csproj", "{6C877439-36C5-4999-BB24-5F15622E91A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clay.Application", "Clay.Application\Clay.Application.csproj", "{6C877439-36C5-4999-BB24-5F15622E91A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoDoorLocking", "AutoDoorLocking\AutoDoorLocking.csproj", "{DC41AD0E-71CF-4505-9661-0C4A321A3CB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{6C877439-36C5-4999-BB24-5F15622E91A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C877439-36C5-4999-BB24-5F15622E91A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C877439-36C5-4999-BB24-5F15622E91A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC41AD0E-71CF-4505-9661-0C4A321A3CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC41AD0E-71CF-4505-9661-0C4A321A3CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC41AD0E-71CF-4505-9661-0C4A321A3CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC41AD0E-71CF-4505-9661-0C4A321A3CB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

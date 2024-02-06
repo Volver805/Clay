@@ -19,6 +19,7 @@ namespace Clay.Tests.Api
         {
             // Arrange
             var lockServiceMock = new Mock<ILockService>();
+            var authServiceMock = new Mock<IAuthenticationService>();
 
             var middleware = new LockAuthorizationMiddleware(innerHttpContext =>
             {
@@ -31,7 +32,7 @@ namespace Clay.Tests.Api
             httpContext.Request.RouteValues["lockId"] = "1";
 
             // Act
-            await middleware.Invoke(httpContext, lockServiceMock.Object);
+            await middleware.Invoke(httpContext, lockServiceMock.Object, authServiceMock.Object);
 
             // Assert
             Assert.AreEqual(StatusCodes.Status401Unauthorized, httpContext.Response.StatusCode);
@@ -42,6 +43,7 @@ namespace Clay.Tests.Api
         {
             // Arrange
             var lockServiceMock = new Mock<ILockService>();
+            var authServiceMock = new Mock<IAuthenticationService>();
 
             var middleware = new LockAuthorizationMiddleware(innerHttpContext =>
             {
@@ -53,7 +55,7 @@ namespace Clay.Tests.Api
             httpContext.Request.RouteValues["lockId"] = "1";
 
             // Act
-            await middleware.Invoke(httpContext, lockServiceMock.Object);
+            await middleware.Invoke(httpContext, lockServiceMock.Object, authServiceMock.Object);
 
             // Assert
             Assert.AreEqual(StatusCodes.Status401Unauthorized, httpContext.Response.StatusCode);
@@ -64,6 +66,8 @@ namespace Clay.Tests.Api
         {
             // Arrange
             var lockServiceMock = new Mock<ILockService>();
+            var authServiceMock = new Mock<IAuthenticationService>();
+
             lockServiceMock.Setup(service => service.CanUserAccessLock(123, 1)).Returns(false);
 
             var middleware = new LockAuthorizationMiddleware(innerHttpContext =>
@@ -77,7 +81,7 @@ namespace Clay.Tests.Api
             httpContext.Request.RouteValues["lockId"] = "1";
 
             // Act
-            await middleware.Invoke(httpContext, lockServiceMock.Object);
+            await middleware.Invoke(httpContext, lockServiceMock.Object, authServiceMock.Object);
 
             // Assert
             Assert.AreEqual(StatusCodes.Status401Unauthorized, httpContext.Response.StatusCode);

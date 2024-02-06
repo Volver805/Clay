@@ -52,7 +52,7 @@ We're going to go with a mix between these two solutions where we will have Role
 
 #### - How will the autolocking functionality Work?
 Once the user locks a door we could set a timeout that after x seconds the door should update its status to locked however if we just do this will put additional load on the server while keeping multiple threads occupied after a job is finished so we need to **decouple** this functionality from our API layer.
-**Solution:** We're going to implement a basic [Azure Function](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) it will run a scheduled task responsible for looking into the database and checking which locks that are unlocked should be locked right now and will update their values immediately. This will keep our system decoupled without affecting the performance, availability or scalability of our system.
+**Solution:** We're going to implement a basic background service outside our API that is responsible for looking into the database and checking which locks that are unlocked should be locked right now and will update their values immediately. This will keep our system decoupled without affecting the performance, availability or scalability of our system. In future we can migrate this into an Azure or Lambda function based on the deployment platform we're using.
  
 
 ### Low Level Design

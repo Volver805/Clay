@@ -60,5 +60,16 @@ namespace Clay.Application.Services
         {
             return await _lockRepository.GetAll().AnyAsync(el => el.ID == lockId);
         }
+
+        public async Task AutoLockDoors()
+        {
+            var timeNow = DateTime.Now;
+
+            var locks = await _lockRepository.GetAll().Where(l => !l.IsLocked && l.ShouldLockAfter.HasValue).Where(l => l.UnlockedAt.Value.AddSeconds(l.ShouldLockAfter.Value) <= timeNow).ToListAsync();
+            
+            locks.ForEach(l => l.IsLocked = true);
+
+            await _lockRepository.UpdateRangeAsync(locks);
+        }
     }
 }

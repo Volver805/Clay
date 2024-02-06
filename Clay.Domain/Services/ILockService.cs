@@ -11,5 +11,6 @@ namespace Clay.Domain.Services
         public Task UpdateLockStatus(int id, bool lockStatus, int userId);
         public bool CanUserAccessLock(int userId, int lockId);
         public Task<bool> LockExists(int lockId);
+        public Task AutoLockDoors();
     }
 }

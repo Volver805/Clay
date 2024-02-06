@@ -13,5 +13,6 @@ namespace Clay.Domain.Repositories
         public Task<TEntity> GetByIdAsync(int id);
         public Task<TEntity> CreateAsync(TEntity entity);
         public Task UpdateAsync(TEntity entity);
+        public Task UpdateRangeAsync(IEnumerable<TEntity> entities);
     }
 }

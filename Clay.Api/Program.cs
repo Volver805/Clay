@@ -24,7 +24,6 @@ builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<ILockService, LockService>();
 builder.Services.AddScoped<IEventService, EventService > ();
 
-
 var jwtSettings = builder.Configuration.GetSection("JWTSettings");
 
 builder.Services.AddAuthentication(options =>
